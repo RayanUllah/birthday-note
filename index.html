@@ -4,18 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Chaghai!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
   <style>
     /* General Styles */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Pacifico', cursive;
       overflow: hidden;
-    }
-
-    /* Sky Blue Background */
-    body {
       background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
       display: flex;
       justify-content: center;
@@ -37,26 +34,36 @@
       animation: float 3s infinite ease-in-out;
     }
 
-    /* Text Styles */
-    .text-container {
+    /* Text Box */
+    .text-box {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
-      color: white;
+      max-width: 80%;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
+      transition: opacity 1.5s ease-in-out;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
-    .text-container.show {
+    .text-box.show {
       opacity: 1;
     }
 
     h1 {
       font-size: 3rem;
       margin: 0;
+      color: #ff69b4;
     }
 
     p {
       font-size: 1.5rem;
       margin: 10px 0;
+      color: #333;
     }
 
     /* Button Styles */
@@ -72,6 +79,7 @@
       cursor: pointer;
       margin: 0 10px;
       transition: background 0.3s ease;
+      font-family: 'Pacifico', cursive;
     }
 
     button#yes {
@@ -105,40 +113,58 @@
   <div class="heart" style="top: 80%; left: 60%;">❤️</div>
   <div class="heart" style="top: 90%; left: 80%;">❤️</div>
 
-  <!-- Text Container -->
-  <div class="text-container" id="text1">
-    <h1>Hello Chaghai!</h1>
-  </div>
-
-  <div class="text-container" id="text2">
-    <p>It's your special day!</p>
-  </div>
-
-  <div class="text-container" id="text3">
-    <p>I have made something for you.</p>
-  </div>
-
-  <div class="text-container" id="text4">
-    <p>Do you want to see it?</p>
-    <div class="buttons">
-      <button id="yes">Yes</button>
-      <button id="no">No</button>
+  <!-- Text Box -->
+  <div class="text-box" id="text-box">
+    <div id="text1">
+      <h1>Hello Chaghai!</h1>
+    </div>
+    <div id="text2" style="display: none;">
+      <p>It's your special day!</p>
+    </div>
+    <div id="text3" style="display: none;">
+      <p>I have made something for you.</p>
+    </div>
+    <div id="text4" style="display: none;">
+      <p>Do you want to see it?</p>
+      <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+      </div>
     </div>
   </div>
 
   <script>
-    // Function to show text with a delay
-    function showText(elementId, delay) {
+    // Function to switch text with a fade transition
+    function switchText(currentId, nextId, delay) {
       setTimeout(() => {
-        document.getElementById(elementId).classList.add('show');
+        const currentText = document.getElementById(currentId);
+        const nextText = document.getElementById(nextId);
+
+        // Fade out current text
+        currentText.style.opacity = '0';
+        setTimeout(() => {
+          currentText.style.display = 'none';
+
+          // Fade in next text
+          nextText.style.display = 'block';
+          setTimeout(() => {
+            nextText.style.opacity = '1';
+          }, 50);
+        }, 500); // Delay for fade out
       }, delay);
     }
 
-    // Show texts sequentially
-    showText('text1', 1000);
-    showText('text2', 3000);
-    showText('text3', 5000);
-    showText('text4', 7000);
+    // Show the text box initially
+    const textBox = document.getElementById('text-box');
+    setTimeout(() => {
+      textBox.classList.add('show');
+      document.getElementById('text1').style.opacity = '1';
+    }, 500);
+
+    // Switch texts sequentially
+    switchText('text1', 'text2', 3000); // After 3 seconds
+    switchText('text2', 'text3', 6000); // After 6 seconds
+    switchText('text3', 'text4', 9000); // After 9 seconds
 
     // Button Actions
     document.getElementById('yes').addEventListener('click', () => {
