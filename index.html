@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Chaghai!</title>
+  <style>
+    /* General Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Sky Blue Background */
+    body {
+      background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Floating Hearts */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .heart {
+      position: absolute;
+      color: pink;
+      font-size: 20px;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    /* Text Styles */
+    .text-container {
+      text-align: center;
+      color: white;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .text-container.show {
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    /* Button Styles */
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: background 0.3s ease;
+    }
+
+    button#yes {
+      background: pink;
+      color: white;
+    }
+
+    button#no {
+      background: lightgray;
+      color: black;
+    }
+
+    button#yes:hover {
+      background: #ff69b4;
+    }
+
+    button#no:hover {
+      background: darkgray;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Hearts -->
+  <div class="heart" style="top: 10%; left: 5%;">❤️</div>
+  <div class="heart" style="top: 20%; left: 20%;">❤️</div>
+  <div class="heart" style="top: 30%; left: 50%;">❤️</div>
+  <div class="heart" style="top: 40%; left: 70%;">❤️</div>
+  <div class="heart" style="top: 50%; left: 90%;">❤️</div>
+  <div class="heart" style="top: 60%; left: 10%;">❤️</div>
+  <div class="heart" style="top: 70%; left: 30%;">❤️</div>
+  <div class="heart" style="top: 80%; left: 60%;">❤️</div>
+  <div class="heart" style="top: 90%; left: 80%;">❤️</div>
+
+  <!-- Text Container -->
+  <div class="text-container" id="text1">
+    <h1>Hello Chaghai!</h1>
+  </div>
+
+  <div class="text-container" id="text2">
+    <p>It's your special day!</p>
+  </div>
+
+  <div class="text-container" id="text3">
+    <p>I have made something for you.</p>
+  </div>
+
+  <div class="text-container" id="text4">
+    <p>Do you want to see it?</p>
+    <div class="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to show text with a delay
+    function showText(elementId, delay) {
+      setTimeout(() => {
+        document.getElementById(elementId).classList.add('show');
+      }, delay);
+    }
+
+    // Show texts sequentially
+    showText('text1', 1000);
+    showText('text2', 3000);
+    showText('text3', 5000);
+    showText('text4', 7000);
+
+    // Button Actions
+    document.getElementById('yes').addEventListener('click', () => {
+      alert("Yay! Let's continue..."); // Replace with your desired action
+    });
+
+    document.getElementById('no').addEventListener('click', () => {
+      alert("Aww, maybe later?"); // Replace with your desired action
+    });
+  </script>
+</body>
+</html>
