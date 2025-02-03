@@ -6,55 +6,35 @@
   <title>Happy Birthday Chaghai!</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    /* General Styles */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: 'Pacifico', cursive;
       overflow: hidden;
-      background: #87CEEB; /* Sky Blue Background */
+      background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
     }
 
-    /* Floating Hearts */
     @keyframes float {
       0% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-20px); }
       100% { transform: translateY(0); }
     }
 
     .heart {
       position: absolute;
-      font-size: 24px;
-      color: transparent;
-      text-shadow: 0 0 2px pink, 0 0 5px pink;
-      border: 2px solid pink;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: pink;
+      font-size: 20px;
       animation: float 3s infinite ease-in-out;
     }
 
-    /* Smaller Hearts */
-    .small-heart {
-      font-size: 16px;
-      width: 15px;
-      height: 15px;
-      border: 1px solid pink;
-      text-shadow: 0 0 1px pink, 0 0 3px pink;
-    }
-
-    /* Centered Text Box */
     .text-box {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px 40px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
@@ -62,7 +42,7 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
       position: absolute;
-      top: 33%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
@@ -71,19 +51,14 @@
       opacity: 1;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin: 0;
-      color: #ff69b4;
+    .text-content {
+      display: none;
     }
 
-    p {
-      font-size: 1.5rem;
-      margin: 10px 0;
-      color: #333;
+    .text-content.show {
+      display: block;
     }
 
-    /* Button Styles */
     .buttons {
       margin-top: 20px;
     }
@@ -119,29 +94,23 @@
   </style>
 </head>
 <body>
-  <!-- Floating Hollow Hearts -->
   <div class="heart" style="top: 10%; left: 5%;">❤️</div>
-  <div class="heart small-heart" style="top: 20%; left: 20%;">❤️</div>
+  <div class="heart" style="top: 20%; left: 20%;">❤️</div>
   <div class="heart" style="top: 30%; left: 50%;">❤️</div>
-  <div class="heart small-heart" style="top: 40%; left: 70%;">❤️</div>
+  <div class="heart" style="top: 40%; left: 70%;">❤️</div>
   <div class="heart" style="top: 50%; left: 90%;">❤️</div>
-  <div class="heart small-heart" style="top: 60%; left: 10%;">❤️</div>
-  <div class="heart" style="top: 70%; left: 30%;">❤️</div>
-  <div class="heart small-heart" style="top: 80%; left: 60%;">❤️</div>
-  <div class="heart" style="top: 90%; left: 80%;">❤️</div>
 
-  <!-- Text Box -->
   <div class="text-box" id="text-box">
     <div class="text-content show" id="text1">
       <h1>Hello Chaghai!</h1>
     </div>
-    <div class="text-content" id="text2" style="display: none;">
+    <div class="text-content" id="text2">
       <p>It's your special day!</p>
     </div>
-    <div class="text-content" id="text3" style="display: none;">
+    <div class="text-content" id="text3">
       <p>I have made something for you.</p>
     </div>
-    <div class="text-content" id="text4" style="display: none;">
+    <div class="text-content" id="text4">
       <p>Do you want to see it?</p>
       <div class="buttons">
         <button id="yes">Yes</button>
@@ -151,40 +120,30 @@
   </div>
 
   <script>
-    // Function to switch text with a fade transition
     function switchText(currentId, nextId, delay) {
       setTimeout(() => {
-        const currentText = document.getElementById(currentId);
-        const nextText = document.getElementById(nextId);
-
-        // Fade out current text
-        currentText.style.opacity = "0";
+        document.getElementById(currentId).classList.remove('show');
         setTimeout(() => {
-          currentText.style.display = "none";
-          nextText.style.display = "block";
-          nextText.style.opacity = "1";
-        }, 500); // Delay for fade out
+          document.getElementById(nextId).classList.add('show');
+        }, 500);
       }, delay);
     }
 
-    // Show the text box initially
     const textBox = document.getElementById('text-box');
     setTimeout(() => {
       textBox.classList.add('show');
     }, 500);
 
-    // Switch texts sequentially
-    switchText('text1', 'text2', 3000); // After 3 seconds
-    switchText('text2', 'text3', 6000); // After 6 seconds
-    switchText('text3', 'text4', 9000); // After 9 seconds
+    setTimeout(() => switchText('text1', 'text2', 3000), 3000);
+    setTimeout(() => switchText('text2', 'text3', 6000), 6000);
+    setTimeout(() => switchText('text3', 'text4', 9000), 9000);
 
-    // Button Actions
     document.getElementById('yes').addEventListener('click', () => {
-      alert("Yay! Let's continue..."); // Replace with your desired action
+      alert("Yay! Let's continue...");
     });
 
     document.getElementById('no').addEventListener('click', () => {
-      alert("Aww, maybe later?"); // Replace with your desired action
+      alert("Aww, maybe later?");
     });
   </script>
 </body>
